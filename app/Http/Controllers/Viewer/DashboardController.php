@@ -26,7 +26,7 @@ class DashboardController extends Controller
                 ->orderBy('recorded_date', 'asc')
                 ->get();
 
-            $facultyCount = Faculty::where('is_active', true)->count() ?: 13;
+            $facultyCount = Faculty::where('is_active', true)->count() ?: 12;
         } catch (\Exception $e) {
             // DB not yet available — pages render with empty collections
             // Run: php artisan migrate && php artisan db:seed

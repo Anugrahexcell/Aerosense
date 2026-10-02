@@ -11,6 +11,10 @@ class PemantauanChartWidget extends ChartWidget
     protected int|string|array $columnSpan = 'full';
     protected ?string $maxHeight = '320px';
 
+    // Auto-refresh every 5 minutes — picks up new hourly sensor readings
+    protected ?string $pollingInterval = '5m';
+
+
     // Excluded from auto-discovery — rendered explicitly via @livewire() in the Pemantauan blade
     protected static bool $isDiscovered = false;
 

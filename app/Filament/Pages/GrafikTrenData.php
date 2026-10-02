@@ -20,6 +20,7 @@ class GrafikTrenData extends Page implements HasTable
     protected static ?int    $navigationSort  = 3;
     protected string $view = 'filament.pages.grafik-tren-data';
 
+
     // ── Filters ──────────────────────────────────────────────────
     public ?int $faculty_id = null;
     public string $period   = '7';   // days
@@ -51,6 +52,7 @@ class GrafikTrenData extends Page implements HasTable
             ->when($this->faculty_id, fn ($q) => $q->where('faculty_id', $this->faculty_id))
             ->where('recorded_at', '>=', now()->subDays((int) $this->period))
             ->orderBy('recorded_at')
+            ->limit(200)   // cap at 200 points — enough for any period, avoids loading 1000s of rows
             ->get();
 
         if ($readings->isEmpty()) {
@@ -133,12 +135,10 @@ class GrafikTrenData extends Page implements HasTable
                 ->label('Status Kualitas')
                 ->badge()
                 ->color(fn ($state) => match ($state) {
-                    'Baik'               => 'success',
-                    'Sedang'             => 'warning',
-                    'Tidak Sehat'        => 'danger',
-                    'Sangat Tidak Sehat' => 'danger',
-                    'Berbahaya'          => 'danger',
-                    default              => 'gray',
+                    'Baik'   => 'success',
+                    'Sedang' => 'warning',
+                    'Buruk'  => 'danger',
+                    default  => 'gray',
                 }),
         ];
     }

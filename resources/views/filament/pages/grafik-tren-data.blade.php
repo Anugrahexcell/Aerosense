@@ -118,7 +118,8 @@
                 </div>
             </div>
         </div>
-        <div style="padding:0.25rem 0 0.5rem; position:relative; height:380px;">
+        {{-- wire:ignore prevents Livewire from morphing the canvas (would destroy chart) --}}
+        <div wire:ignore style="padding:0.25rem 0 0.5rem; position:relative; height:380px;">
             <canvas id="trendChart"></canvas>
         </div>
     </x-filament::section>
@@ -247,16 +248,27 @@
                 });
             }
 
-            // Initial render
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', buildChart);
-            } else {
+            // Initial render — wait for Livewire to finish mounting
+            function tryInit() {
+                if (typeof Chart === 'undefined') {
+                    // Chart.js not loaded yet — retry in 100ms
+                    setTimeout(tryInit, 100);
+                    return;
+                }
                 buildChart();
             }
 
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', tryInit);
+            } else {
+                // Small delay so Livewire finishes painting the canvas
+                setTimeout(tryInit, 150);
+            }
+
             // Re-render after Livewire updates (filter change / poll)
-            document.addEventListener('livewire:navigated', buildChart);
-            window.addEventListener('livewire:update', () => setTimeout(buildChart, 120));
+            // 'livewire:updated' fires AFTER DOM is patched — safe to query the canvas
+            document.addEventListener('livewire:navigated', () => setTimeout(buildChart, 150));
+            document.addEventListener('livewire:updated',   () => setTimeout(buildChart, 200));
         })();
     </script>
 

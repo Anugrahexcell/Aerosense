@@ -52,16 +52,16 @@ class SensorReading extends Model
 
     /**
      * Compute air quality status live from the current CO2 reading.
-     * Aligned with XGBoost v4 zone thresholds and AirQualityPrediction labels.
-     *   ≤ 1,000 ppm  → Baik
-     *  1,001–2,000 ppm → Sedang
-     *  > 2,000 ppm  → Tidak Sehat
+     * 3-tier classification (Baik / Sedang / Buruk):
+     *   400 – 1 000 ppm → Baik
+     * 1 001 – 2 000 ppm → Sedang
+     * 2 001 – 5 000 ppm → Buruk
      */
     public function getComputedStatusAttribute(): string
     {
         if ($this->co2 <= 1000) return 'Baik';
         if ($this->co2 <= 2000) return 'Sedang';
-        return 'Tidak Sehat';
+        return 'Buruk';
     }
 
     /**
@@ -70,10 +70,10 @@ class SensorReading extends Model
     public function getStatusClassAttribute(): string
     {
         return match ($this->computed_status) {
-            'Baik'        => 'baik',
-            'Sedang'      => 'sedang',
-            'Tidak Sehat' => 'tidak-sehat',
-            default       => 'baik',
+            'Baik'   => 'baik',
+            'Sedang' => 'sedang',
+            'Buruk'  => 'buruk',
+            default  => 'baik',
         };
     }
 }

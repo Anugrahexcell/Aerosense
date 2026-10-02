@@ -327,13 +327,20 @@
             setRef(chart);
         }
 
-        // Initial render
+        // Initial render — wait for Chart.js to be available
         const initData = @json($chartData);
-        function init() { buildAllCharts(initData); }
+        function tryInit() {
+            if (typeof Chart === 'undefined') {
+                setTimeout(tryInit, 100);
+                return;
+            }
+            buildAllCharts(initData);
+        }
+
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', init);
+            document.addEventListener('DOMContentLoaded', tryInit);
         } else {
-            init();
+            setTimeout(tryInit, 150);
         }
 
         // Re-render when faculty filter changes (via PHP dispatch)
@@ -341,7 +348,7 @@
             buildAllCharts(e.detail.data);
         });
 
-        document.addEventListener('livewire:navigated', init);
+        document.addEventListener('livewire:navigated', () => setTimeout(tryInit, 150));
     })();
     </script>
 

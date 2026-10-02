@@ -13,19 +13,18 @@ class FacultySeeder extends Seeder
     public function run(): void
     {
         $faculties = [
-            ['name' => 'Fakultas Teknik',                    'code' => 'FT'],
-            ['name' => 'Fakultas Ekonomika dan Bisnis',      'code' => 'FEB'],
-            ['name' => 'Fakultas Hukum',                     'code' => 'FH'],
-            ['name' => 'Fakultas Kedokteran',                'code' => 'FK'],
-            ['name' => 'Fakultas MIPA',                      'code' => 'FMIPA'],
-            ['name' => 'Fakultas Peternakan dan Pertanian',  'code' => 'FPP'],
+            ['name' => 'Fakultas Teknik',                       'code' => 'FT'],
+            ['name' => 'Fakultas Ekonomika dan Bisnis',         'code' => 'FEB'],
+            ['name' => 'Fakultas Hukum',                        'code' => 'FH'],
+            ['name' => 'Fakultas Kedokteran',                   'code' => 'FK'],
+            ['name' => 'Fakultas MIPA',                         'code' => 'FMIPA'],
+            ['name' => 'Fakultas Peternakan dan Pertanian',     'code' => 'FPP'],
             ['name' => 'Fakultas Ilmu Sosial dan Ilmu Politik', 'code' => 'FISIP'],
-            ['name' => 'Fakultas Psikologi',                 'code' => 'FPsi'],
-            ['name' => 'Fakultas Ilmu Budaya',               'code' => 'FIB'],
-            ['name' => 'Fakultas Kesehatan Masyarakat',      'code' => 'FKM'],
-            ['name' => 'Fakultas Perikanan dan Ilmu Kelautan', 'code' => 'FPIK'],
-            ['name' => 'Sekolah Vokasi',                     'code' => 'SV'],
-            ['name' => 'Sekolah Pascasarjana',               'code' => 'SPs'],
+            ['name' => 'Fakultas Psikologi',                    'code' => 'FPsi'],
+            ['name' => 'Fakultas Ilmu Budaya',                  'code' => 'FIB'],
+            ['name' => 'Fakultas Kesehatan Masyarakat',         'code' => 'FKM'],
+            ['name' => 'Fakultas Perikanan dan Ilmu Kelautan',  'code' => 'FPIK'],
+            ['name' => 'Sekolah Vokasi',                        'code' => 'SV'],
         ];
 
         foreach ($faculties as $faculty) {

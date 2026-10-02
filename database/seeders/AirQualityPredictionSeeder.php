@@ -51,8 +51,6 @@ class AirQualityPredictionSeeder extends Seeder
             ['co2' =>  875, 'temp' => 26.0, 'hum' => 64.5, 'drift' => 0.3, 'status_base' => 'Baik'],
             // SV    — vocational workshops
             ['co2' => 1320, 'temp' => 26.8, 'hum' => 62.8, 'drift' => 1.0, 'status_base' => 'Sedang'],
-            // P1    — quiet postgrad offices
-            ['co2' =>  755, 'temp' => 25.2, 'hum' => 60.5, 'drift' => 0.3, 'status_base' => 'Baik'],
         ];
 
         $statusFromCo2 = function (float $co2): string {
@@ -61,7 +59,7 @@ class AirQualityPredictionSeeder extends Seeder
             return 'Tidak Sehat';
         };
 
-        foreach ($faculties->take(13) as $index => $faculty) {
+        foreach ($faculties->take(12) as $index => $faculty) {
             $s = $facultySamples[$index] ?? end($facultySamples);
 
             for ($day = 0; $day < 90; $day++) {

@@ -2,6 +2,8 @@
 
 namespace App\Filament\Widgets;
 
+use App\Models\Faculty;
+use App\Models\SensorReading;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
@@ -12,8 +14,11 @@ class DashboardStatsOverview extends BaseWidget
 
     protected function getStats(): array
     {
+        $totalFaculties  = Faculty::where('is_active', true)->count();
+        $connectedCount  = SensorReading::distinct('faculty_id')->count('faculty_id');
+
         return [
-            Stat::make('Sensor Aktif', '13/13')
+            Stat::make('Sensor Aktif', "{$connectedCount}/{$totalFaculties}")
                 ->description('Fakultas Terhubung')
                 ->descriptionIcon('heroicon-m-battery-100')
                 ->color('success'),
