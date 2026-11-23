@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 *.log
 .DS_Store
 .env
@@ -22,3 +23,10 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+=======
+*.zip
+laravel/.env
+laravel/migrate_error.txt
+laravel/vendor/
+laravel/node_modules/
+>>>>>>> tujuan/main

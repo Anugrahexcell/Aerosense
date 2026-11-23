@@ -1,0 +1,22 @@
+CARA MENJALANKAN DI LOKAL
+(di folder utama "AeroSenseV2")
+php -S 127.0.0.1:8000 -t public_html 
+//(jangan pakai php artisan serve)
+
+==Sebelum ngoding==
+git pull
+
+//(ubah kode)//
+
+==Setelah ngoding==
+git add .
+git commit -m "pesan apa aja yang udah dirubah"
+git push
+
+
+
+
+==Khusus EGA==
+//git add .
+//git commit -m "kasih pesan cok"
+//git deploy //untuk ngepush ke server (ega aja)
