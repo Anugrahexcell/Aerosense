@@ -19,6 +19,13 @@ class SensorReadingsTable
             ->heading('Kelola Data')
             ->description('Tambah data kualitas udara atau hapus data korup dari sensor. Data tidak dapat diedit secara manual.')
             ->columns([
+                TextColumn::make('faculty_id')
+                    ->label('ID Node')
+                    ->sortable()
+                    ->badge()
+                    ->color('primary')
+                    ->alignCenter(),
+
                 TextColumn::make('faculty.name')
                     ->label('Fakultas')
                     ->searchable()
